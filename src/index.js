@@ -1,17 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react"; // for Javascript ES6+
+import ReactDom from "react-dom";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// must capitalize component names in React
+const Greeting = () => {
+  return <h4>This is Makoi. Here is my first component</h4>;
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// render method looks for code to render & a location of where we want to render it
+// most always self-close functions with <... />
+// Here, we inject our javascript into the div with id = root
+ReactDom.render(<Greeting />, document.getElementById("root"));
