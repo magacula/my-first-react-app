@@ -1,8 +1,14 @@
 import React from "react"; // for Javascript ES6+
 import ReactDOM from "react-dom";
 
-//CSS
+// imports CSS file
 import "./index.css";
+
+// imports Books Data file
+import { books } from "./books";
+
+// imports Book Component
+import Book from "./Book";
 
 // Must capitalize component names in React
 // This is an example of a Stateless Functional component (always returns JSX)
@@ -59,31 +65,6 @@ const Message = () => <p>Hi this is a message</p>;
 
 //////// Uses separate components to make many instances of a bigger component //////
 
-// Create an array of books and iterate over array to retrieve properties
-const books = [
-  {
-    id: 0,
-    img:
-      "https://images-na.ssl-images-amazon.com/images/I/61zdzbAmmQL._AC_UL210_SR210,210_.jpg",
-    title: "The Book of Five RIngs",
-    author: "Miyamoto Musashi",
-  },
-  {
-    id: 1,
-    img:
-      "https://images-na.ssl-images-amazon.com/images/I/710glEdDlfL._AC_UL210_SR210,210_.jpg",
-    title: "Influence: The Psychology of Persuasion",
-    author: "Robert B. Cialdini",
-  },
-  {
-    id: 2,
-    img:
-      "https://images-na.ssl-images-amazon.com/images/I/51YO6t2XmrL._AC_UL210_SR210,210_.jpg",
-    title: "The Art of Peace: Teachings of the",
-    author: "Morihei Ueshiba",
-  },
-];
-
 const BookList = () => {
   return (
     <section className="bookList">
@@ -92,41 +73,6 @@ const BookList = () => {
         return <Book key={book.id} book={book}></Book>;
       })}
     </section>
-  );
-};
-
-const Book = (props) => {
-  console.log(props);
-  // We can destructing props to retrieve property values inside the component
-  const { img, title, author } = props.book;
-
-  // Create EventHandler to handle click event
-  const clickHandler = () => {
-    alert("Hi!");
-  };
-
-  const complexExample = (author) => {
-    console.log(author);
-  };
-
-  return (
-    // use an inline event handler function to handle mouseover events
-    <article
-      className="book"
-      onMouseOver={() => {
-        console.log({ title });
-      }}
-    >
-      <img className="images" src={img} alt="" />
-      <h1>{title}</h1>
-      <h4>{author}</h4>
-      <button type="button" onClick={clickHandler}>
-        Button
-      </button>
-      <button type="button" onClick={() => complexExample(author)}>
-        more complex example
-      </button>
-    </article>
   );
 };
 
