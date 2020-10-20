@@ -57,42 +57,92 @@ const Message = () => <p>Hi this is a message</p>;
 
 /* ReactDOM.render(<Greeting />, document.getElementById("root"));*/
 
-//////// Uses separate components to make many instances of a bigger component ///////
+//////// Uses separate components to make many instances of a bigger component //////
+
+// Create an array of books and iterate over array to retrieve properties
+const books = [
+  {
+    id: 0,
+    img:
+      "https://images-na.ssl-images-amazon.com/images/I/61zdzbAmmQL._AC_UL210_SR210,210_.jpg",
+    title: "The Book of Five RIngs",
+    author: "Miyamoto Musashi",
+  },
+  {
+    id: 1,
+    img:
+      "https://images-na.ssl-images-amazon.com/images/I/710glEdDlfL._AC_UL210_SR210,210_.jpg",
+    title: "Influence: The Psychology of Persuasion",
+    author: "Robert B. Cialdini",
+  },
+  {
+    id: 2,
+    img:
+      "https://images-na.ssl-images-amazon.com/images/I/51YO6t2XmrL._AC_UL210_SR210,210_.jpg",
+    title: "The Art of Peace: Teachings of the",
+    author: "Morihei Ueshiba",
+  },
+];
+
 const BookList = () => {
   return (
     <section className="bookList">
-      <Book />
-      <Book />
-      <Book />
+      {books.map((book) => {
+        // Lists in React need a Key Property with a unique ID value
+        return <Book key={book.id} book={book}></Book>;
+      })}
     </section>
   );
 };
 
-const Book = () => {
+const Book = (props) => {
+  console.log(props);
+  // We can destructing props to retrieve property values inside the component
+  const { img, title, author } = props.book;
+
+  // Create EventHandler to handle click event
+  const clickHandler = () => {
+    alert("Hi!");
+  };
+
+  const complexExample = (author) => {
+    console.log(author);
+  };
+
   return (
-    <article className="book">
-      <Image />
-      <Title />
-      <Author />
+    // use an inline event handler function to handle mouseover events
+    <article
+      className="book"
+      onMouseOver={() => {
+        console.log({ title });
+      }}
+    >
+      <img className="images" src={img} alt="" />
+      <h1>{title}</h1>
+      <h4>{author}</h4>
+      <button type="button" onClick={clickHandler}>
+        Button
+      </button>
+      <button type="button" onClick={() => complexExample(author)}>
+        more complex example
+      </button>
     </article>
   );
 };
 
-const Image = () => (
-  <img
-    src="https://m.media-amazon.com/images/I/41JFPRxkrLL._AC_UY218_.jpg"
-    class="s-image"
-    alt="The Art of War"
-    srcset="https://m.media-amazon.com/images/I/41JFPRxkrLL._AC_UY218_.jpg 1x, https://m.media-amazon.com/images/I/41JFPRxkrLL._AC_UY327_FMwebp_QL65_.jpg 1.5x, https://m.media-amazon.com/images/I/41JFPRxkrLL._AC_UY436_FMwebp_QL65_.jpg 2x, https://m.media-amazon.com/images/I/41JFPRxkrLL._AC_UY500_FMwebp_QL65_.jpg 2.2935x"
-    data-image-index="4"
-    data-image-load=""
-    data-image-latency="s-product-image"
-    data-image-source-density="1"
-  ></img>
-);
-
-const Title = () => <h1>Title of a book</h1>;
-
-const Author = () => <h4>Author Name</h4>;
-
 ReactDOM.render(<BookList />, document.getElementById("root"));
+
+// The map() function lets you manipulate the items in an array by iterating and accessing individual items
+
+/*
+const names = ["Bob", "Janet", "Phil"];
+const printNames = names.map((name) => {
+  return <h1>{name}</h1>;
+});
+console.log(names);
+const NamesList = () => {
+  return <section>{printNames}</section>;
+};
+
+ReactDOM.render(<NamesList />, document.getElementById("root"));
+*/
